@@ -5,7 +5,7 @@ import model
 import misc
 import time
 import datetime
-import urllib2
+import urllib3
 import logging
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO)
@@ -451,6 +451,7 @@ def get_house_perregion(district):
                 #model.Hisprice.insert(houseID=info_dict['houseID'], totalPrice=info_dict['totalPrice']).upsert().execute()
 
         with model.database.atomic():
+
             model.Houseinfo.insert_many(data_source).upsert().execute()
             model.Hisprice.insert_many(hisprice_data_source).upsert().execute()
         time.sleep(1)
